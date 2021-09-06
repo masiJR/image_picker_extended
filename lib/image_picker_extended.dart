@@ -9,57 +9,56 @@ import 'package:image_picker/image_picker.dart';
 class ImagePickerExtends {
   /// Choose image
   /// If permission deny it will return [null]
-  static Future<File> chooseCamera(BuildContext context) async {
-    File file;
-
+  static Future<File?> chooseCamera(BuildContext context) async {
+    XFile? file;
     try {
-      file = await ImagePicker.pickImage(source: ImageSource.camera);
+      file = await ImagePicker().pickImage(source: ImageSource.camera);
     } catch (e) {
       _showAlertPermissionDeny(context);
     }
-    return file;
+    return File(file!.path);
   }
 
   /// Choose image
   /// If permission deny it will return [null]
-  static Future<File> chooseGallery(BuildContext context) async {
-    File file;
+  static Future<File?> chooseGallery(BuildContext context) async {
+    XFile? file;
 
     try {
-      file = await ImagePicker.pickImage(source: ImageSource.gallery);
+      file = await ImagePicker().pickImage(source: ImageSource.gallery);
     } catch (e) {
       _showAlertPermissionDeny(context);
     }
 
-    return file;
+    return File(file!.path);
   }
 
   /// Choose image
   /// If permission deny it will return [null]
-  static Future<File> chooseCameraVideo(BuildContext context) async {
-    File file;
+  static Future<File?> chooseCameraVideo(BuildContext context) async {
+    XFile? file;
 
     try {
-      file = await ImagePicker.pickVideo(source: ImageSource.camera);
+      file = await ImagePicker().pickVideo(source: ImageSource.camera);
     } catch (e) {
       _showAlertPermissionDeny(context);
     }
 
-    return file;
+    return File(file!.path);
   }
 
   /// Choose image
   /// If permission deny it will return [null]
-  static Future<File> chooseGalleryVideo(BuildContext context) async {
-    File file;
+  static Future<File?> chooseGalleryVideo(BuildContext context) async {
+    XFile? file;
 
     try {
-      file = await ImagePicker.pickVideo(source: ImageSource.gallery);
+      file = await ImagePicker().pickVideo(source: ImageSource.gallery);
     } catch (e) {
       _showAlertPermissionDeny(context);
     }
 
-    return file;
+    return File(file!.path);
   }
 
   static void _showAlertPermissionDeny(BuildContext context) {
@@ -77,7 +76,7 @@ class ImagePickerExtends {
         title: Text("Permission"),
         content: Text("Please turn on permission in the settings"),
         actions: <Widget>[
-          FlatButton(
+          ElevatedButton(
             child: Text("OK"),
             onPressed: () => Navigator.of(context).pop(),
           ),
@@ -104,7 +103,7 @@ class ImagePickerExtends {
   }
 
   static void chooseImage(BuildContext context,
-      {@required Function(File file) selectedImage,
+      {required Function(File? file) selectedImage,
       Color iconColor = Colors.black45}) {
     showModalBottomSheet(
       context: context,
